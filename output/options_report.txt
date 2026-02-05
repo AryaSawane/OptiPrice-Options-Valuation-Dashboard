@@ -1,0 +1,32 @@
+
+        Options Pricing and Greeks Calculation Report
+
+        1. User Inputs:
+        - Option type: call
+        - Stock Ticker: AAPL
+        - Stock Price (S): 205.4
+        - Strike Price (K): 207.5
+        - Days to Expiration: 10 days
+        - Risk-Free Rate (r): 5.00%
+        - Market Price of the Option: 22.25
+        - Start and end date for calculating Historical Volatility: 2023-01-01 - 2025-05-03
+
+        2. Calculated Intermediate Values:
+        - Time to Maturity (T): 0.0274 years
+        - Historical Volatility (σ): 26.43%
+
+        3. Option Prices:
+        - Option Price (Black-Scholes): 2.74 
+        - Option Price (Monte Carlo): 2.67
+        - Option Price (Binomial Tree): 2.75 
+
+        4. Greeks:
+        - Delta: 0.4267
+        - Gamma: 0.0437
+        - Vega: 13.3302
+        - Theta: -68.5498
+        - Rho: 2.3253
+
+        5. Implied Volatility Calculation:
+        - Implied Volatility (IV): 170.67%
+        
