@@ -9,31 +9,33 @@ class DataHandler:
         self.data = None
         self.S = None   # latest stock price
 
-    def get_stock_data(self):
-        """
-        Fetch latest stock data from Yahoo Finance and set self.S.
-        Returns the latest close price (float) or None on error.
-        """
-        try:
-            self.data = yf.download(self.ticker, period="1d", progress=False)
+  def get_stock_data(self):
+    try:
+        # use last few days instead of period="1d"
+        self.data = yf.download(
+            self.ticker,
+            start="2026-02-01",   # or: datetime.today() - timedelta(days=7)
+            end=None,
+            progress=False
+        )
 
-            if self.data.empty:
-                st.error(f"No data found for the ticker: {self.ticker}")
-                self.S = None
-                return None
-
-            if "Close" in self.data.columns and not self.data["Close"].empty:
-                self.S = float(self.data["Close"].iloc[-1])
-                return self.S
-            else:
-                st.error(f"'Close' price data is not available for {self.ticker}.")
-                self.S = None
-                return None
-
-        except Exception as e:
-            st.error(f"Error fetching stock data for {self.ticker}: {e}")
+        if self.data.empty:
+            st.error(f"No data found for the ticker: {self.ticker}")
             self.S = None
             return None
+
+        if "Close" in self.data.columns and not self.data["Close"].empty:
+            self.S = float(self.data["Close"].iloc[-1])
+            return self.S
+        else:
+            st.error(f"'Close' price data is not available for {self.ticker}.")
+            self.S = None
+            return None
+
+    except Exception as e:
+        st.error(f"Error fetching stock data for {self.ticker}: {e}")
+        self.S = None
+        return None
 
     def calculate_historical_volatility(self, start_date: str, end_date: str, window: int = 252):
         """
