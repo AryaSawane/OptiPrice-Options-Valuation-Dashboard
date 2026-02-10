@@ -32,10 +32,7 @@ class DataHandler:
             self.S = None
             return None
 
-    except Exception as e:
-        st.error(f"Error fetching stock data for {self.ticker}: {e}")
-        self.S = None
-        return None
+    
 
     def calculate_historical_volatility(self, start_date: str, end_date: str, window: int = 252):
         """
